@@ -11,6 +11,7 @@ class Header extends Component {
         return (
           <li>
             <a href="/auth/google">Log In with Google</a>
+            <a href="/auth/facebook">Log In with Facebook</a>
           </li>
         );
       default:
