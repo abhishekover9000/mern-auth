@@ -11,7 +11,7 @@ export default function(state = null, action) {
 				false
 			);
 		case LOGIN_LOCAL:
-			return state;
+			return action.payload.data.user || false;
 		default:
 			return state;
 	}

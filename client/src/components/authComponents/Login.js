@@ -63,6 +63,12 @@ class Login extends Component {
 	}
 }
 
+function mapStateToProps(state) {
+	return {
+		auth: state.auth
+	};
+}
+
 function mapDispatchToProps(dispatch) {
 	return bindActionCreators(
 		{
@@ -72,4 +78,4 @@ function mapDispatchToProps(dispatch) {
 	);
 }
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

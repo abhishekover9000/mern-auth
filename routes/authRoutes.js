@@ -80,11 +80,12 @@ module.exports = app => {
 		);
 	});
 
-	app.post("/auth/login", passport.authenticate("local"), function(req, res) {
-		const userId = User.findOne({ email: req.body.email });
+	app.post("/auth/login", passport.authenticate("local"), async function(
+		req,
 		res
-			.send({ errors: "null", redirect: "/dashboard", user: userId.id })
-			.redirect("/dashboard");
+	) {
+		const userId = await User.findOne({ email: req.body.email });
+		res.send({ errors: "null", redirect: "/dashboard", user: userId._id });
 	});
 
 	// Authentication API
