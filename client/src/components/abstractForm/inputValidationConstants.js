@@ -1,0 +1,7 @@
+export default {
+	GREATER_THAN: "GT",
+	LESS_THAN: "LT",
+	GREATER_THAN_EQUAL_TO: "GEQ",
+	LESS_THAN_EQUAL_TO: "LEQ",
+	EQUAL_TO: "EQ"
+};

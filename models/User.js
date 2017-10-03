@@ -1,10 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const passportLocalMongoose = require("passport-local-mongoose");
 
 const userSchema = new Schema({
 	googleID: String,
 	facebookID: String,
-	email: String
+	email: String,
+	username: String,
+	password: String
 });
 
-mongoose.model("users", userSchema);
+userSchema.plugin(passportLocalMongoose);
+
+mongoose.model("User", userSchema);

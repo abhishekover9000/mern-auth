@@ -11,6 +11,9 @@ import Header from "./Header.js";
 import Dashboard from "./Dashboard.js";
 import Landing from "./Landing.js";
 
+import Login from "./authComponents/Login";
+import Register from "./authComponents/Register";
+
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
@@ -24,6 +27,8 @@ class App extends Component {
             <Header />
             <Route exact path="/" component={Landing} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </div>
         </BrowserRouter>
       </div>

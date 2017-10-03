@@ -12,6 +12,8 @@ class Header extends Component {
           <li>
             <a href="/auth/google">Log In with Google</a>
             <a href="/auth/facebook">Log In with Facebook</a>
+            <a href="/login"> Log In </a>
+            <a href="/register"> Register </a>
           </li>
         );
       default:

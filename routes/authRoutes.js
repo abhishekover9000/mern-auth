@@ -1,4 +1,5 @@
 const passport = require("passport");
+const mongoose = require("mongoose");
 
 module.exports = app => {
 	// Google Authentication
@@ -33,6 +34,10 @@ module.exports = app => {
 		passport.authenticate(
 			"facebook",
 			{
+				authType: "reauthenticate",
+				callBackURL: "auth/facebook/callback"
+			},
+			{
 				scope: ["public_profile", "email"]
 			},
 			{
@@ -52,6 +57,35 @@ module.exports = app => {
 			res.redirect("/dashboard");
 		}
 	);
+
+	//Local Auth
+	const User = mongoose.model("User");
+	app.post("/auth/register", function(req, res) {
+		console.log(req.body);
+		User.register(
+			new User({
+				username: req.body.username,
+				email: req.body.emailAddress
+			}),
+			req.body.password,
+			function(err, user) {
+				if (err) {
+					return res.render("register", { user: user });
+				}
+
+				passport.authenticate("local")(req, res, function() {
+					res.redirect("/login");
+				});
+			}
+		);
+	});
+
+	app.post("/auth/login", passport.authenticate("local"), function(req, res) {
+		const userId = User.findOne({ email: req.body.email });
+		res
+			.send({ errors: "null", redirect: "/dashboard", user: userId.id })
+			.redirect("/dashboard");
+	});
 
 	// Authentication API
 	app.get("/", (req, res) => {
